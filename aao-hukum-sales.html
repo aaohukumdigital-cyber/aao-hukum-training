@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Aao Hukum — Sales Training Portal</title>
+  <style>
+    :root{
+      --brand:#b30000;
+      --accent:#ffd9d6;
+      --bg:#fff6f5;
+      --card:#ffffff;
+      --muted:#6b6b6b;
+      --shadow: 0 12px 30px rgba(11,11,11,0.08);
+      --radius:14px;
+      --max-width:1200px;
+      --mono: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --gold:#f0b429;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--mono);
+      background: linear-gradient(180deg,#fff 0%, #fff7f7 100%);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{
+      max-width:var(--max-width);
+      margin:28px auto;
+      padding:24px;
+    }
+
+    header.hero{
+      background: linear-gradient(90deg, rgba(179,0,0,0.06), rgba(240,180,40,0.03));
+      border-radius:18px;
+      padding:18px 20px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      box-shadow:var(--shadow);
+      margin-bottom:20px;
+      border:1px solid rgba(179,0,0,0.06);
+    }
+
+    .logo{
+      width:84px;height:84px;border-radius:12px;
+      background:linear-gradient(180deg,var(--brand),#7a0000);
+      display:flex;align-items:center;justify-content:center;color:#fff;
+      font-weight:800;font-size:26px;box-shadow:0 8px 26px rgba(179,0,0,0.12);
+    }
+
+    .hero-title h1{margin:0;font-size:20px;color:var(--brand);letter-spacing:0.2px}
+    .hero-title p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    aside.card{
+      background: linear-gradient(180deg,#fff,#fff);
+      padding:18px;border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      height:fit-content;
+      position:sticky; top:28px;
+    }
+
+    .toc h3{margin:0 0 12px 0;color:var(--brand);font-size:18px}
+    .toc ul{list-style:none;padding:0;margin:0}
+    .toc li{margin:12px 0;font-size:15px; display:flex; gap:10px; align-items:center}
+    .toc a{color:#222;text-decoration:none}
+    .badge{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#ffdede);color:var(--brand);padding:6px 12px;border-radius:999px;font-weight:700;font-size:13px}
+
+    /* quick stats */
+    .stats{display:flex;gap:10px;margin-top:14px}
+    .stat{
+      flex:1;padding:10px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff);border:1px solid rgba(0,0,0,0.03);
+      display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+    }
+    .stat strong{color:var(--brand);font-size:20px}
+    .small{font-size:12px;color:var(--muted)}
+
+    /* MAIN */
+    main{min-height:300px}
+    .section{
+      background:linear-gradient(180deg,#fff,#fff);
+      border-radius:14px;
+      padding:18px;
+      margin-bottom:18px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(179,0,0,0.04);
+    }
+    .section h2{margin:0 0 6px 0;color:var(--brand);font-size:20px}
+    .meta{color:var(--muted);font-size:13px;margin-bottom:12px}
+
+    /* Insight card */
+    .insight{
+      border-radius:12px;
+      padding:16px;
+      background:linear-gradient(180deg,#fff,#fff);
+      margin:14px 0;
+      border-left:8px solid var(--brand);
+      transition:transform .12s ease, box-shadow .12s ease;
+      display:flex;gap:14px;
+    }
+    .insight:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.08)}
+    .insight .icon{
+      width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#fff);
+      display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--brand);flex-shrink:0;
+      border:1px solid rgba(179,0,0,0.06);
+    }
+    .insight-content{flex:1}
+    .insight h3{margin:0 0 8px 0;font-size:17px}
+    .insight .sub{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .insight ul{margin:8px 0 0 18px;padding:0;color:#222}
+    .insight p{margin:6px 0}
+
+    /* highlight box */
+    .highlight{
+      background: linear-gradient(90deg, rgba(240,180,40,0.06), rgba(179,0,0,0.02));
+      border-radius:10px;padding:12px;border:1px solid rgba(240,180,40,0.12);margin-top:12px;
+      color:#333;font-size:14px;
+    }
+
+    /* advanced boosters */
+    .boosters{display:grid;grid-template-columns:repeat(1,1fr);gap:10px;margin-top:12px}
+    .booster{
+      padding:12px;border-radius:10px;background:linear-gradient(90deg,#fff7e6,#fff);
+      border-left:6px solid var(--gold);
+    }
+
+    /* CTA & utilities */
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-block;padding:10px 14px;border-radius:10px;background:var(--brand);color:#fff;
+      text-decoration:none;font-weight:800;font-size:13px;box-shadow:0 8px 26px rgba(179,0,0,0.12);
+    }
+    .btn-ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--muted);padding:8px 12px;border-radius:10px}
+    .copy{
+      background:#222;color:#fff;padding:8px 10px;border-radius:8px;border:none;cursor:pointer;font-size:13px;
+    }
+
+    footer{margin-top:14px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr;gap:14px}
+      aside.card{position:relative;top:0}
+      .logo{width:64px;height:64px;font-size:20px}
+      .insight{flex-direction:row}
+    }
+    @media (max-width:560px){
+      .insight{flex-direction:column;gap:8px}
+      .insight .icon{width:48px;height:48px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="top">
+    <header class="hero">
+      <div class="logo">AH</div>
+      <div class="hero-title">
+        <h1>AAO HUKUM — Sales Training Portal</h1>
+        <p>Visual handbook: 30 WhatsApp insights + 10 On-Call insights — copy & apply immediately</p>
+        <div style="margin-top:10px;">
+          <a class="btn" href="#whatsapp">Start: WhatsApp Insights</a>
+          <a class="btn btn-ghost" href="#oncall" style="margin-left:10px">Open: On-Call Tips</a>
+        </div>
+      </div>
+      <div style="margin-left:auto">
+        <div style="text-align:right">
+          <div style="font-weight:800;color:var(--muted);font-size:13px">AAO HUKUM — Sales Excellence</div>
+          <div style="margin-top:6px"><span style="background:var(--gold);padding:6px 10px;border-radius:999px;font-weight:800;color:#7a3f00">Team Playbook</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT SIDEBAR -->
+      <aside class="card" aria-label="Quick navigation">
+        <div class="toc">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><span class="badge">30</span> <a href="#whatsapp">WhatsApp Insights</a></li>
+            <li><span class="badge">10</span> <a href="#oncall">On-Call Insights</a></li>
+            <li> <a href="#callflow">Short Call Flow</a></li>
+            <li> <a href="#sop">Follow-up SOP</a></li>
+          </ul>
+        </div>
+
+        <div style="margin-top:18px">
+          <strong>Quick KPIs</strong>
+          <div class="stats">
+            <div class="stat"><strong>60s</strong><div class="small">Response time target</div></div>
+            <div class="stat"><strong>40–70</strong><div class="small">WhatsApp leads/day</div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <strong>Actions</strong>
+          <div style="margin-top:8px" class="row">
+            <button class="copy" onclick="copyAll()">Copy All Text</button>
+            <a class="btn-ghost" href="#" onclick="window.print();return false">Print</a>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;font-size:13px;color:var(--muted)">
+          <p><strong>Team Rule:</strong> Use voice notes + 2 options + visual photos as default.</p>
+        </div>
+
+        <div style="margin-top:18px">
+          <div style="padding:12px;border-radius:10px;background:linear-gradient(90deg,#fff6f6,#fff);border:1px solid rgba(179,0,0,0.04)">
+            <strong style="color:var(--brand)">Trainer tips</strong>
+            <ul style="margin:8px 0 0 18px;color:#444">
+              <li>Daily roleplay: 15 min</li>
+              <li>Use the "Hold room" script</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main>
+        <!-- WhatsApp Insights -->
+        <section id="whatsapp" class="section">
+          <h2>⭐ 30 WhatsApp High-Conversion Insights — Detailed & Visual</h2>
+          <p class="meta">Each insight: WHY → EXAMPLE → HOW TO APPLY → RESULT. Use immediately on leads.</p>
+
+          <!-- Looping insights: 1 -> 30 -->
+          <article class="insight" id="insight-1">
+            <div class="icon">⚡</div>
+            <div class="insight-content">
+              <h3>INSIGHT 1 — Speed = Conversion (Reply Within 60 Seconds)</h3>
+              <div class="sub"><b>WHY:</b> Guests compare 3–4 companies. Fastest reply wins trust.</div>
+              <p><b>EXAMPLE:</b> Reply in 10s while others take 5 min — you look reliable instantly.</p>
+              <p><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li>Keep notifications ON during working hours;</li>
+                <li>First reply: <i>“Sir, give me 2 mins — preparing your best plan”</i>;</li>
+                <li>Then prepare & send the itinerary fast.</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Guest stays with you and does not go elsewhere.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-2">
+            <div class="icon">🎤</div>
+            <div class="insight-content">
+              <h3>INSIGHT 2 — Use Voice Notes (10× Higher Trust)</h3>
+              <div class="sub"><b>WHY:</b> Voice transfers confidence, tone and personal warmth.</div>
+              <p><b>EXAMPLE:</b> A warm 20–30s voice note builds rapport faster than paragraphs of text.</p>
+              <p><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li>Soft, clear tone;</li>
+                <li>Introduce yourself briefly;</li>
+                <li>Mention 1 highlight (hotel or activity).</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Guest sees you as a human consultant, not just a message sender.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-3">
+            <div class="icon">🏝️</div>
+            <div class="insight-content">
+              <h3>INSIGHT 3 — Sell Experience First, Price Later</h3>
+              <div class="sub"><b>WHY:</b> Guests buy feelings & experiences first, price second.</div>
+              <p><b>EXAMPLE (WRONG):</b> “Sir package 20k.” — this invites immediate comparison.</p>
+              <p><b>EXAMPLE (RIGHT):</b> “Sir, I selected a lake-view room with private cab so your evenings are relaxed.”</p>
+              <p><b>HOW TO APPLY:</b> Explain experience → show benefits → then give price.</p>
+              <div class="highlight"><strong>Result:</strong> Guests stop price-shopping and ask about specifics instead.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-4">
+            <div class="icon">🔁</div>
+            <div class="insight-content">
+              <h3>INSIGHT 4 — Only Give 2 Options (Premium + Budget)</h3>
+              <div class="sub"><b>WHY:</b> More options cause choice paralysis.</div>
+              <p><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li>Option A — Premium (higher price, more inclusions)</li>
+                <li>Option B — Value (best comfort at lower price)</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Faster decisions — most guests choose Option B.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-5">
+            <div class="icon">📸</div>
+            <div class="insight-content">
+              <h3>INSIGHT 5 — Send Photos (Visual = Decision Trigger)</h3>
+              <div class="sub"><b>WHY:</b> Photos help guests visualise themselves in the trip.</div>
+              <p><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li>Send 4–6 curated images (room, view, car, activity);</li>
+                <li>Resize images for fast load on WhatsApp (no heavy files).</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Visuals create stronger intent & faster conversions.</div>
+            </div>
+          </article>
+
+          <!-- 6 to 10 -->
+          <article class="insight" id="insight-6">
+            <div class="icon">❓</div>
+            <div class="insight-content">
+              <h3>INSIGHT 6 — Don’t Overload with Questions at Start</h3>
+              <div class="sub"><b>WHY:</b> Too many upfront questions irritate leads.</div>
+              <p><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li>Ask only: Dates | Members | Pickup location;</li>
+                <li>Collect other preferences after initial engagement.</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Higher reply rate and quicker trust-building.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-7">
+            <div class="icon">🔔</div>
+            <div class="insight-content">
+              <h3>INSIGHT 7 — Follow-Up Framework (3-step System)</h3>
+              <div class="sub"><b>WHY:</b> Multiple touches convert many leads.</div>
+              <p><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li><b>1 hr:</b> “Sir, rooms are filling. Can I hold it for you?”</li>
+                <li><b>Next day:</b> “I can secure a special rate for your dates. Want me to check?”</li>
+                <li><b>Final:</b> “Should I release or keep on hold?”</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Polite persistence wins bookings.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-8">
+            <div class="icon">🧑‍🤝‍🧑</div>
+            <div class="insight-content">
+              <h3>INSIGHT 8 — Use Guest’s Name</h3>
+              <div class="sub"><b>WHY:</b> Personalization increases emotional connection.</div>
+              <p><b>EXAMPLE:</b> “Rajesh Sir, here is your customized plan.”</p>
+              <div class="highlight"><strong>Result:</strong> Stronger trust & rapport.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-9">
+            <div class="icon">🎭</div>
+            <div class="insight-content">
+              <h3>INSIGHT 9 — Mirror Guest’s Tone</h3>
+              <div class="sub"><b>WHY:</b> Mirroring builds rapport subconsciously.</div>
+              <p><b>HOW TO APPLY:</b> Slow guest → slow voice; fast guest → energetic voice; match language.</p>
+              <div class="highlight"><strong>Result:</strong> Guest feels comfortable & responds more openly.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-10">
+            <div class="icon">📝</div>
+            <div class="insight-content">
+              <h3>INSIGHT 10 — Explain Itinerary in Simple Human Language</h3>
+              <div class="sub"><b>WHY:</b> Jargon confuses guests.</div>
+              <p><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li>Short lines;</li>
+                <li>Mention travel time, major sights, comfort notes.</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Guest understands fully & feels confident.</div>
+            </div>
+          </article>
+
+          <!-- 11 - 20 -->
+          <article class="insight" id="insight-11">
+            <div class="icon">💞</div>
+            <div class="insight-content">
+              <h3>INSIGHT 11 — Sell Feeling, Not Just Sightseeing</h3>
+              <p class="sub"><b>EXAMPLE:</b> “Udaipur evening at Fateh Sagar is magical for couples.”</p>
+              <p><b>HOW TO APPLY:</b> Highlight emotions, experiences and memorable moments.</p>
+              <div class="highlight"><strong>Result:</strong> Guests become emotionally invested in the plan.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-12">
+            <div class="icon">✅</div>
+            <div class="insight-content">
+              <h3>INSIGHT 12 — Close with a Decision Trigger</h3>
+              <p class="sub"><b>MAGIC LINE:</b> “Sir, shall I block your room?”</p>
+              <div class="highlight"><strong>Result:</strong> Prompt finalization decision.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-13">
+            <div class="icon">💡</div>
+            <div class="insight-content">
+              <h3>INSIGHT 13 — Never Reduce Price Instantly</h3>
+              <p class="sub"><b>WHY:</b> Instant discounts reduce perceived value.</p>
+              <p><b>HOW TO APPLY:</b> Explain quality (hotel, food, support), then offer 2 tiered options.</p>
+              <div class="highlight"><strong>Result:</strong> Stronger negotiation & long-term trust.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-14">
+            <div class="icon">⏳</div>
+            <div class="insight-content">
+              <h3>INSIGHT 14 — Use Real Urgency (Not Fake)</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> “Sir, weekend dates fill fast — can I hold the room?”</p>
+              <div class="highlight"><strong>Result:</strong> Faster decisions from guests.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-15">
+            <div class="icon">🛡️</div>
+            <div class="insight-content">
+              <h3>INSIGHT 15 — Show Safety & Trust Factors</h3>
+              <p class="sub"><b>WHAT TO SAY:</b></p>
+              <ul>
+                <li>24×7 support;</li>
+                <li>Verified & reviewed hotels;</li>
+                <li>Professional drivers & backup plans.</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Reduces booking fear & increases conversions.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-16">
+            <div class="icon">📋</div>
+            <div class="insight-content">
+              <h3>INSIGHT 16 — Share Short Summary Before Itinerary</h3>
+              <p class="sub"><b>WHY:</b> Large messages get skipped.</p>
+              <p><b>HOW TO APPLY:</b> Share 3 highlights + 1 photo + 1 CTA before sending full plan.</p>
+              <div class="highlight"><strong>Result:</strong> Higher open & engagement rates.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-17">
+            <div class="icon">🎯</div>
+            <div class="insight-content">
+              <h3>INSIGHT 17 — Give Guest Control</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> Ask “Which hotel feels better for you? A or B?”</p>
+              <div class="highlight"><strong>Result:</strong> Guest feels respected & chooses faster.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-18">
+            <div class="icon">🔊</div>
+            <div class="insight-content">
+              <h3>INSIGHT 18 — One Good Voice Explanation</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> 20–30s voice note explaining the key parts of itinerary.</p>
+              <div class="highlight"><strong>Result:</strong> Higher trust & quicker closure.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-19">
+            <div class="icon">📞</div>
+            <div class="insight-content">
+              <h3>INSIGHT 19 — When Guest Says “Call Later”</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> “Sure sir, what time should I call? I’ll update availability before calling.”</p>
+              <div class="highlight"><strong>Result:</strong> Secures next contact window and reduces drop-off.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-20">
+            <div class="icon">💬</div>
+            <div class="insight-content">
+              <h3>INSIGHT 20 — Handling ‘Budget High’ Objection</h3>
+              <p class="sub"><b>3-step method:</b></p>
+              <ol>
+                <li>Reassure (value first)</li>
+                <li>Give 2 options (premium & value)</li>
+                <li>Hold booking (small window)</li>
+              </ol>
+              <div class="highlight"><strong>Result:</strong> Better conversions with minimal discounting.</div>
+            </div>
+          </article>
+
+          <!-- 21 - 30 -->
+          <article class="insight" id="insight-21">
+            <div class="icon">🤫</div>
+            <div class="insight-content">
+              <h3>INSIGHT 21 — Silent Guest Strategy</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> “Sir, your plan is ready — want to see the summary?”</p>
+              <div class="highlight"><strong>Result:</strong> Gentle nudge that breaks silence politely.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-22">
+            <div class="icon">🔍</div>
+            <div class="insight-content">
+              <h3>INSIGHT 22 — Explain Why Your Price Is Higher</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> “Sir, cheaper packages reduce hotel quality & no 24×7 support. We give a premium end-to-end experience.”</p>
+              <div class="highlight"><strong>Result:</strong> Guests see value and trust the upgrade.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-23">
+            <div class="icon">💳</div>
+            <div class="insight-content">
+              <h3>INSIGHT 23 — Show Transparent Costing</h3>
+              <p class="sub"><b>WHY:</b> Transparency builds trust.</p>
+              <p>Share a clear cost breakup (hotel + cab + activities + margin).</p>
+              <div class="highlight"><strong>Result:</strong> Guest feels safe to confirm.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-24">
+            <div class="icon">🗺️</div>
+            <div class="insight-content">
+              <h3>INSIGHT 24 — Use Visual Learning</h3>
+              <p class="sub"><b>HOW TO APPLY:</b></p>
+              <ul>
+                <li>Send map screenshot</li>
+                <li>Hotel photos</li>
+                <li>Day-wise visual highlights</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Guests see the trip clearly and proceed faster.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-25">
+            <div class="icon">🎯</div>
+            <div class="insight-content">
+              <h3>INSIGHT 25 — End Every Call With a CTA</h3>
+              <p class="sub"><b>Examples:</b></p>
+              <ul>
+                <li>“Shall I hold your room?”</li>
+                <li>“Should I prepare the payment link?”</li>
+              </ul>
+              <div class="highlight"><strong>Result:</strong> Prompt decisions from guests.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-26">
+            <div class="icon">🔼</div>
+            <div class="insight-content">
+              <h3>INSIGHT 26 — Discount vs Upgrade Strategy</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> Offer room upgrade or early check-in instead of pure discounts.</p>
+              <div class="highlight"><strong>Result:</strong> Guests feel premium and accept better margins.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-27">
+            <div class="icon">📊</div>
+            <div class="insight-content">
+              <h3>INSIGHT 27 — Give a Price Range First</h3>
+              <p class="sub"><b>Example:</b> “Sir, starts from ₹11,000 to ₹18,000 depending on hotel type.”</p>
+              <div class="highlight"><strong>Result:</strong> Sets expectations and avoids sticker shock.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-28">
+            <div class="icon">✂️</div>
+            <div class="insight-content">
+              <h3>INSIGHT 28 — Use Small Message Blocks</h3>
+              <p class="sub"><b>HOW TO APPLY:</b> Headline → Bullets → Images → CTA.</p>
+              <div class="highlight"><strong>Result:</strong> Higher readability and action.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-29">
+            <div class="icon">⚙️</div>
+            <div class="insight-content">
+              <h3>INSIGHT 29 — Master Fast Itinerary Creation</h3>
+              <p class="sub"><b>ACTION:</b> Keep 10 ready base itineraries; customize per lead.</p>
+              <div class="highlight"><strong>Result:</strong> Instant replies = instant conversions.</div>
+            </div>
+          </article>
+
+          <article class="insight" id="insight-30">
+            <div class="icon">❤️</div>
+            <div class="insight-content">
+              <h3>INSIGHT 30 — End With Emotion & Assurance</h3>
+              <p class="sub"><b>MAGIC LINE:</b> “Sir, Aao Hukum will take care of your trip like family.”</p>
+              <div class="highlight"><strong>Result:</strong> Emotional trust → bookings.</div>
+            </div>
+          </article>
+
+          <!-- Advanced boosters -->
+          <div style="margin-top:16px">
+            <h3 style="color:var(--brand);margin-bottom:8px">🚀 Advanced Conversion Boosters (Extra 5 Tips)</h3>
+            <div class="boosters">
+              <div class="booster"><strong>Booster 1 — Pre-built Microsite for Each Lead</strong><p style="margin:6px 0">Create a single-page microsite (photos + itinerary + testimonials) and send the link. Microsites convert much higher than text messages.</p></div>
+              <div class="booster"><strong>Booster 2 — Use Voice + Photo Combo</strong><p style="margin:6px 0">Send a voice note and immediately follow with 3 photos — audio creates trust, photos create desire.</p></div>
+              <div class="booster"><strong>Booster 3 — “Hold + Small Deposit”</strong><p style="margin:6px 0">Offer to hold room with a small refundable deposit — reduces procrastination dramatically.</p></div>
+              <div class="booster"><strong>Booster 4 — Live Video Tour</strong><p style="margin:6px 0">If possible, record 30s live walk-through of hotel/room and share — creates authenticity.</p></div>
+              <div class="booster"><strong>Booster 5 — Post-Sale Delight</strong><p style="margin:6px 0">After booking, send a personalized welcome voice note + few tips for the trip — reduces cancellations & increases referrals.</p></div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- On-call insights -->
+        <section id="oncall" class="section">
+          <h2>📞🔥 10 On-Call High-Conversion Insights — Full Scripts</h2>
+          <p class="meta">Actionable call scripts & lines your team can use immediately.</p>
+
+          <article class="insight" id="call-1">
+            <div class="icon">⏱️</div>
+            <div class="insight-content">
+              <h3>1 — First 15 Seconds = Trust</h3>
+              <p class="sub"><b>WHY:</b> First impression decides attention.</p>
+              <p><b>SCRIPT:</b> “Good evening Rajesh Sir, Deependar from Aao Hukum. I’m calling to help you plan your perfect Rajasthan trip.”</p>
+            </div>
+          </article>
+
+          <article class="insight" id="call-2">
+            <div class="icon">🎯</div>
+            <div class="insight-content">
+              <h3>2 — Guided Question Method (One Q at a time)</h3>
+              <p class="sub"><b>SCRIPT FLOW:</b></p>
+              <ol>
+                <li>“Sir, how many adults & kids?”</li>
+                <li>“Perfect — your travel dates?”</li>
+                <li>“Pickup from Jaipur or Delhi?”</li>
+              </ol>
+            </div>
+          </article>
+
+          <article class="insight" id="call-3">
+            <div class="icon">🎨</div>
+            <div class="insight-content">
+              <h3>3 — Use Emotion & Experience</h3>
+              <p class="sub"><b>SCRIPT:</b> “Sir, Jaisalmer sunset with our desert camp is a lifetime memory — private jeep & cultural program included.”</p>
+            </div>
+          </article>
+
+          <article class="insight" id="call-4">
+            <div class="icon">🧾</div>
+            <div class="insight-content">
+              <h3>4 — Always Give 2 Options</h3>
+              <p class="sub"><b>SCRIPT:</b> “Sir, two plans — Premium heritage stay OR Value comfort stay. Which suits your family?”</p>
+            </div>
+          </article>
+
+          <article class="insight" id="call-5">
+            <div class="icon">✅</div>
+            <div class="insight-content">
+              <h3>5 — Yes Ladder Technique</h3>
+              <p class="sub"><b>SCRIPT SEQUENCE:</b></p>
+              <ol>
+                <li>“You prefer private cab, right?”</li>
+                <li>“You want safe hotels, correct?”</li>
+                <li>“You want comfortable travel?”</li>
+                <li>“Great — shall I block this?”</li>
+              </ol>
+            </div>
+          </article>
+
+          <article class="insight" id="call-6">
+            <div class="icon">⚠️</div>
+            <div class="insight-content">
+              <h3>6 — Use Natural Urgency</h3>
+              <p class="sub"><b>SCRIPT:</b> “Sir, premium hotels are limited for those dates — can I hold for a few hours?”</p>
+            </div>
+          </article>
+
+          <article class="insight" id="call-7">
+            <div class="icon">🧘</div>
+            <div class="insight-content">
+              <h3>7 — Calm Objection Handling</h3>
+              <p class="sub"><b>SCRIPT:</b> “I understand sir. Let me show one option where you save 2–3k without losing experience.”</p>
+            </div>
+          </article>
+
+          <article class="insight" id="call-8">
+            <div class="icon">🧭</div>
+            <div class="insight-content">
+              <h3>8 — “What I Recommend For You” Strategy</h3>
+              <p class="sub"><b>SCRIPT:</b> “Sir, based on your family profile and dates, I recommend Udaipur + Jaisalmer — it balances comfort & experience.”</p>
+            </div>
+          </article>
+
+          <article class="insight" id="call-9">
+            <div class="icon">🔔</div>
+            <div class="insight-content">
+              <h3>9 — Always End With Strong CTA</h3>
+              <p class="sub"><b>SCRIPT:</b> “Sir, shall I block the room for you now?” or “Shall I prepare the advance payment link?”</p>
+            </div>
+          </article>
+
+          <article class="insight" id="call-10">
+            <div class="icon">📈</div>
+            <div class="insight-content">
+              <h3>10 — Follow-Up Call Structure (Close 70% Leads)</h3>
+              <p class="sub"><b>SCRIPT:</b> “Good morning Rajesh Sir — yesterday we finalised a plan. Your hotel has limited rooms left — should I hold it for you now?”</p>
+            </div>
+          </article>
+
+        </section>
+
+        <!-- Call flow + SOP -->
+        <section id="callflow" class="section">
+          <h2>📋 Short Call Flow & Follow-up SOP</h2>
+          <div class="insight" style="border-left:8px solid var(--gold);">
+            <div class="icon">📞</div>
+            <div class="insight-content">
+              <h3>Short Call Flow (Daily)</h3>
+              <p class="sub"><b>Flow:</b> Greeting → Comfort → Dates → Members → 2 Options → Photos → Objection Handling → Urgency → CTA</p>
+              <div class="highlight"><strong>Opening:</strong> “Good evening Rajesh Sir, Deependar from Aao Hukum. I’m calling to help you plan your perfect trip.”</div>
+              <div style="margin-top:10px" class="highlight"><strong>End of call CTA:</strong> “Shall I block the room?” or “Shall I prepare the payment link?”</div>
+            </div>
+          </div>
+
+          <div class="insight" id="sop" style="margin-top:16px">
+            <div class="icon">🗓️</div>
+            <div class="insight-content">
+              <h3>Follow-up SOP (3 Steps)</h3>
+              <ol>
+                <li><b>Day 0 (Initial):</b> Short summary + 2 photos + voice note + price range.</li>
+                <li><b>Day 1 (~1 hour):</b> Follow-up: “Rooms are filling — want me to hold?” & call if required.</li>
+                <li><b>Day 2 (next morning):</b> Offer small extra value (upgrades/early check-in/freebie).</li>
+                <li><b>Final (Day 3):</b> Final nudge: “Release or keep on hold?”</li>
+              </ol>
+              <div class="callout"><strong>Team rule:</strong> Never spam. Each follow-up must add value or information.</div>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <p>Prepared for <strong>Aao Hukum</strong> • Founder & CEO: Deependar Rathore • Use daily in your sales workflow.</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // copy text helper
+    function copyAll(){
+      var nodes = document.querySelectorAll('main .section');
+      var text = '';
+      nodes.forEach(function(n){
+        text += n.innerText + "\\n\\n";
+      });
+      navigator.clipboard.writeText(text).then(function(){
+        alert('All content copied. Paste into Google Doc or your LMS for training.');
+      }).catch(function(){
+        alert('Copy failed. Please select all (Ctrl+A) and copy manually.');
+      });
+    }
+    // smooth scroll anchors
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href');
+        if(id.length>1){
+          e.preventDefault();
+          var el = document.querySelector(id);
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
